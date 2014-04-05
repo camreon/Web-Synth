@@ -1,0 +1,462 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" href="static.css" />
+        <script src="lib/lib.js"></script>
+        <script src="lib/sequencer.js"></script>
+        <script src="app.js" onload="setupAudioGraph()"></script>
+    </head>
+    
+    <body>
+    <div id="container">
+        <div id="appView" class="bordered noselect">
+            <div id="devicesView" class="rightBorder">
+                <div id="tbView" class="absolutePositioned">
+                    <div id="tbFxView" class="bottomBorder">
+                        
+                        <div id="tbCompView" class="rightBorder">
+                            <div class="fxLabel">
+                                <div id="tbComp" class="fxToggle"></div>
+                            COMPRESSOR</div>
+
+                            <div id="tbCompDialContainer">
+                                <div id="tbCompThreshold" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">THRESHOLD</div>
+                                </div>
+                                
+                                <div id="tbCompKnee" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">KNEE</div>
+                                </div>
+                                
+                                <div id="tbCompRatio" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">RATIO</div>
+                                </div>
+                                
+                                <div id="tbCompReduction" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">REDUCTION</div>
+                                </div>
+
+                                <div id="tbCompAttack" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">ATTACK</div>
+                                </div>
+
+                                <div id="tbCompRelease" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">RELEASE</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="tbDistView" class="rightBorder">
+                                <div class="fxLabel">
+                                    <div id="tbDist" class="fxToggle"></div>
+                                DISTORTION
+                                </div>
+                                <div id="tbDistDialContainer">
+                                    <div id="tbDistAmount" class="dialControl">
+                                        <div class="dialTipContainer">
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        </div>
+                                        <div class="dialLabel">AMOUNT</div>
+                                    </div>
+                                    
+                                    <div id="tbDistType" class="dialControl">
+                                        <div class="dialTipContainer">
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        </div>
+                                        <div class="dialLabel">TYPE</div>
+                                    </div>                                    
+                                </div>
+                        </div>
+                        
+                        <div id="tbDelayView">
+                            <div class="fxLabel">
+                                <div id="tbDelay" class="fxToggle"></div>
+                                DELAY
+                            </div>
+                            <div id="tbDelayDialContainer">
+                                <div id="tbDelayTime" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">TIME</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tbSynthView" class="bottomBorder">
+                        <div id="tbWaveformView" class="rightBorder">
+                            <div class="fxLabel">
+                                WAVEFORM
+                            </div>
+                            <div id="tbWaveformBtnContainer">
+                                <div id="tbSawtoothWaveform" class="waveformBtn waveformBtnOn" onclick="lib.waveformClickHandler(this)"><img src="assets/saw.png" width="48" height="48"></div>
+                                <div id="tbSquareWaveform" class="waveformBtn" onclick="lib.waveformClickHandler(this)"><img src="assets/square.png" width="48" height="48"></div>
+                            </div>
+                        </div>
+                        <div id="tbFilterView">
+                            <div class="fxLabel">
+                                SYNTH CONTROLS
+                            </div>
+                            <div id="tbFilterDialContainer">
+                                <div id="tbTune" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">TUNE</div>
+                                </div>
+                            
+                                <div id="tbCutoff" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">CUTOFF</div>
+                                </div>
+                                
+                                <div id="tbResonance" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">RESONANCE</div>
+                                </div>
+                                
+                                <div id="tbEnv" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">ENV</div>
+                                </div>
+                                
+                                <div id="tbDecay" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">DECAY</div>
+                                </div>
+                            
+                                <div id="tbAccent" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">ACCENT</div>                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bpmView" class="leftBorder">
+                        <div class="fxLabel">
+                            TEMPO
+                        </div>
+                        <div id="bpmDown" onclick="lib.bpmClickHandler(this)"><img src="assets/play.png" width="48" height="48" style="-webkit-transform: rotate(90deg); transform: rotate(90deg);"/></div>
+                        <div id="bpm"><p id="bpmLabel">120</p></div>
+                        <div id="bpmUp" onclick="lib.bpmClickHandler(this)"><img src="assets/play.png" width="48" height="48" style="-webkit-transform: rotate(-90deg); transform: rotate(-90deg);"/></div>
+                    </div>
+                    <div id="tbNoteView" class="absolutePositioned bottomBorder">
+                        <div id="whiteNote1" class="whiteNote noteOn" onclick="lib.noteClickHandler(this);"></div>
+                        <div id="blackNote1" class="blackNote" onclick="lib.noteClickHandler(this);"></div>
+                        <div id="whiteNote2" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="blackNote2" class="blackNote" onclick="lib.noteClickHandler(this)"></div>                        
+                        <div id="whiteNote3" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="whiteNote4" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="blackNote3" class="blackNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="whiteNote5" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="blackNote4" class="blackNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="whiteNote6" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="blackNote5" class="blackNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="whiteNote7" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                        <div id="whiteNote8" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
+                    </div>
+                    <div id="tbStepSequencerView" class="absolutePositioned leftBorder">
+                        <div id="tbStepBtnContainer">
+                            <div id="tbStepView">
+                                <div id="tbStepLabel">STEP</div>
+                                <div id="tbCurrentStepView">1</div>
+                            </div>
+                            <div id="tbPrevStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">PREV</p></div>
+                            <div id="tbNextStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">NEXT</p></div>
+                            
+                            <div id="tbNoteOn" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ON</p></div>
+                            <div id="tbNoteOff" class="tbSeqBtn tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">OFF</p></div>
+                            <div id="tbNoteAccent" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ACC</p></div>
+                            
+                            <div id="tbOctaveDown" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">DOWN</p></div>
+                            <div id="tbOctaveUp" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">UP</p></div>
+                            <div id="tbNoteSlide" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">SLIDE</p></div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div id="trView" class="absolutePositioned">
+                    <div id="trFxView" class="absolutePositioned bottomBorder">
+                        <div id="trCompView" class="rightBorder">
+                            <div class="fxLabel">
+                                <div id="trComp" class="fxToggle"></div>
+                                COMPRESSOR
+                            </div>
+                            <div id="trCompDialContainer">
+                                <div id="trCompThreshold" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">THRESHOLD</div>
+                                </div>
+                                
+                                <div id="trCompKnee" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">KNEE</div>
+                                </div>
+                                
+                                <div id="trCompRatio" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">RATIO</div>
+                                </div>
+                                
+                                <div id="trCompReduction" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">REDUCTION</div>
+                                </div>
+
+                                <div id="trCompAttack" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">ATTACK</div>
+                                </div>
+
+                                <div id="trCompRelease" class="dialControl">
+                                    <div class="dialTipContainer">
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    </div>
+                                    <div class="dialLabel">RELEASE</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="trDistView" class="rightBorder">
+                                <div class="fxLabel">
+                                    <div id="trDist" class="fxToggle"></div>
+                                    DISTORTION
+                                </div>
+                                <div id="trDistDialContainer">
+                                    <div id="trDistAmount" class="dialControl">
+                                        <div class="dialTipContainer">
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        </div>
+                                        <div class="dialLabel">AMOUNT</div>
+                                    </div>
+                                    
+                                    <div id="trDistType" class="dialControl">
+                                        <div class="dialTipContainer">
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        </div>
+                                        <div class="dialLabel">TYPE</div>
+                                    </div>                                    
+                                </div>
+                        </div>
+                        
+                        <div id="trDelayView">
+                            <div class="fxLabel">
+                                <div id="trDelay" class="fxToggle"></div>
+                                DELAY
+                            </div>
+                                <div id="trDelayDialContainer">
+                                    <div id="trDelayTime" class="dialControl">
+                                        <div class="dialTipContainer">
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        </div>
+                                    <div class="dialLabel">TIME</div>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                    </div>
+                
+                    <div id="trMixView" class="absolutePositioned">
+                        <input id="bdFader" type="range" class="absolutePositioned" />
+                        <input id="sdFader" type="range" class="absolutePositioned"  />
+                        <input id="ltFader" type="range"  class="absolutePositioned" />
+                        <input id="mtFader" type="range" />
+                        <input id="htFader" type="range" />
+                        <input id="lcFader" type="range" />
+                        <input id="mcFader" type="range" />
+                        <input id="hcFader" type="range" />
+                        <input id="rsFader" type="range" />
+                        <input id="clFader" type="range" />
+                        <input id="maFader" type="range" />
+                        <input id="cpFader" type="range" />
+                        <input id="cbFader" type="range" />
+                        <input id="cyFader" type="range" />
+                        <input id="ohFader" type="range" />
+                        <input id="chFader" type="range" />
+                    </div>
+                    
+                    <div id="trSoundView" class="absolutePositioned">
+                        <div id="bdSample" class="sampleBtn sampleBtnOn" onclick="lib.drumSoundClickHandler(this)"><p>BD</p></div>
+                        <div id="sdSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>SD</p></div>
+                        <div id="ltSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>LT</p></div>
+                        <div id="mtSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>MT</p></div>
+                        <div id="htSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>HT</p></div>
+                        <div id="lcSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>LC</p></div>
+                        <div id="mcSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>MC</p></div>
+                        <div id="hcSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>HC</p></div>
+                        <div id="rsSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>RS</p></div>
+                        <div id="clSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CL</p></div>
+                        <div id="maSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>MA</p></div>
+                        <div id="cpSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CP</p></div>
+                        <div id="cbSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CB</p></div>
+                        <div id="cySample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CY</p></div>
+                        <div id="ohSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>OH</p></div>
+                        <div id="chSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CH</p></div>
+                    </div>
+                    
+                    <div id="trSequenceView" class="absolutePositioned">
+                    
+                        <div id="trSqBtn1" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">1</div>
+                        <div id="trSqBtn2" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">2</div>
+                        <div id="trSqBtn3" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">3</div>
+                        <div id="trSqBtn4" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">4</div>
+                        
+                        <div id="trSqBtn5" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">5</div>
+                        <div id="trSqBtn6" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">6</div>
+                        <div id="trSqBtn7" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">7</div>
+                        <div id="trSqBtn8" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">8</div>
+                        
+                        <div id="trSqBtn9"  class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">9</div>
+                        <div id="trSqBtn10" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">10</div>
+                        <div id="trSqBtn11" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">11</div>
+                        <div id="trSqBtn12" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">12</div>
+                        
+                        <div id="trSqBtn13" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">13</div>
+                        <div id="trSqBtn14" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">14</div>
+                        <div id="trSqBtn15" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">15</div>
+                        <div id="trSqBtn16" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">16</div>
+                        
+                    </div>
+                </div>                
+            </div>
+            
+            <div id="mainMixerView" class="bottomBorder">
+                <div class="fxLabel">TRANSPORT</div>
+                <div id="transportView">
+                    <div id="transportStopButton" class="transportBtn transportBtnOn" onclick="lib.transportClickHandler(this);"><img src="assets/stop.png"></div>
+                    <div id="transportPlayButton" class="transportBtn" onclick="lib.transportClickHandler(this);"><img src="assets/play.png"></div>
+                </div>
+                
+                <div id="masterFxView">
+                    <div id="masterDistView">
+                        <div class="fxLabel">
+                            <div id="masterDistToggle" class="fxToggle"></div>
+                            MASTER DISTORTION
+                        </div>
+                        <div id="masterDistDialContainer">
+                            <div id="masterDistAmount" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">AMOUNT</div>
+                            </div>
+                            
+                            <div id="masterDistType" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">TYPE</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="masterCompView">
+                        <div class="fxLabel">
+                            <div id="masterCompToggle" class="fxToggle"></div>
+                            MASTER COMPRESSOR
+                        </div>
+                        <div id="masterCompDialContainer">
+                            <div id="masterCompThreshold" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">THRESH</div>
+                            </div>
+                            
+                            <div id="masterCompKnee" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">KNEE</div>
+                            </div>
+                            
+                            <div id="masterCompRatio" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">RATIO</div>
+                            </div>
+                            
+                            <div id="masterCompReduction" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">REDUCTION</div>
+                            </div>
+
+                            <div id="masterCompAttack" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">ATTACK</div>
+                            </div>
+
+                            <div id="masterCompRelease" class="dialControl">
+                                <div class="dialTipContainer">
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                </div>
+                                <div class="dialLabel">RELEASE</div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                </div>
+                
+                <div id="mixView" class="rotated" />
+                    <input id="trFader" type="range" />
+                    <input id="tbFader" type="range" />
+                    <input id="masterFader" type="range" />
+                </div>
+
+                <div id="masterMixLabel" class="fxLabel topBorder">MASTER MIX</div>
+                <div id="mixLabelTB">303</div>
+                <div id="mixLabelTR">808</div>
+                <div id="mixLabelMaster">Master</div>                
+                
+
+            </div>            
+            
+        </div>
+    </div>
+    </body>
+    
+</html>

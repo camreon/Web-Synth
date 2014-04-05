@@ -1,0 +1,867 @@
+@font-face {
+    font-family: 'din_1451_engschriftregular';
+    src: url('assets/din1451e-webfont.eot');
+    src: url('assets/din1451e-webfont.eot?#iefix') format('embedded-opentype'),
+         url('assets/din1451e-webfont.woff') format('woff'),
+         url('assets/din1451e-webfont.ttf') format('truetype'),
+         url('assets/din1451e-webfont.svg#din_1451_engschriftregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    margin: 0 0 0 0;
+    background-color: #3f4649;
+    font-family: din_1451_engschriftregular;
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: .06em;
+    color:white;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.bordered { 
+   border-style: solid;
+   border-width: 1px;
+   border-color: #254438;
+}
+
+div.topBorder {
+   border-style: solid;
+   border-width:1px 0px 0px 0px;
+   border-color: #254438;
+}
+
+div.bottomBorder {
+   border-style: solid;
+   border-width:0px 0px 1px 0px;
+   border-color: #254438;
+}
+
+div.leftBorder {
+   border-style: solid;
+   border-width:0px 0px 0px 1px;
+   border-color: #254438;
+}
+
+
+div.rightBorder {
+   border-style: solid;
+   border-width:0px 1px 0px 0px;
+   border-color: #254438;
+}
+
+div.absolutePositioned {
+    position: absolute;
+}
+
+.rotated {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+p.fxLabel {
+    background-color: #23a86d;
+    font-family: helvetica;
+    font-size: 14px;
+    line-height: 0;
+    margin-top: .5em;
+}
+
+div.fxLabel {
+    background: -webkit-linear-gradient(left, rgba(35, 168, 109, .5) 0%, rgba(35, 168, 109, .05) 100%);
+    background: -moz-linear-gradient(left, rgba(35, 168, 109, .5), rgba(35, 168, 109, .05));
+    padding-left: 4px;
+    float: left;
+    width: 100%;
+}
+
+div.fxToggle {
+    width: 12px;
+    height: 12px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    top: 5px;
+    background-color: white;
+    float: left;
+    cursor: hand;
+}
+
+div.fxToggleOn {
+    background-color: grey;
+}
+
+div.dialControl {
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    margin: 0px 0px 0px 20px;
+    width: 40px; 
+    height:40px; 
+    background-color: #2b473d; 
+    -webkit-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+    float: left;
+    cursor: hand;
+}
+
+div.dialTipContainer {
+    width: 20px; 
+    -webkit-transform: translate(0px, 20px);
+    transform: translate(0px, 20px);
+}
+
+div.dialTip {
+    width: 20px; 
+    height: 2px; 
+    background-color: #23a86d; 
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+}
+
+div.dialLabel {
+    -webkit-transform: rotate(40deg) translate(0, 44px);
+    transform: rotate(40deg) translate(0, 44px);
+    font-size: 16px;
+    text-align: center;
+    width: 55px;
+}
+
+#container {
+
+    width: 100%;
+}
+
+#appView {
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+    background-color: #2d2f31;
+
+}
+
+#mainMixerView {
+    width: 198px;
+    height: 768px;
+float:left;
+}
+
+input[type="range"]{
+    -webkit-appearance:none; 
+    -moz-appearance: none;
+    width:100%; 
+    height:6px;
+    background-color: #2d2f31;
+    background-image: -webkit-linear-gradient(right, rgba(35, 168, 109, .5) 20%, rgba(35, 168, 109, .05) 100%);    
+    background-image: -moz-linear-gradient(right, rgba(35, 168, 109, .5), rgba(35, 168, 109, .05));    
+    }
+    
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    
+    background-color: #2d2f31;
+    background-image: -webkit-linear-gradient(right, rgba(35, 168, 109, .5) 20%, rgba(35, 168, 109, .05) 100%); 
+    background-image: -moz-linear-gradient(right, rgba(35, 168, 109, .5), rgba(35, 168, 109, .05));
+    
+    border: 1px solid #999;
+    height: 10px;
+    width: 20px;    
+}
+
+input[type='range']::-moz-range-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    
+    background-color: #2d2f31;
+    background-image: -webkit-linear-gradient(right, rgba(35, 168, 109, .5) 20%, rgba(35, 168, 109, .05) 100%); 
+    background-image: -moz-linear-gradient(right, rgba(35, 168, 109, .5), rgba(35, 168, 109, .05));
+    
+    border: 1px solid #999;
+    height: 10px;
+    width: 20px;    
+}
+
+#mixView {
+    width: 300px;
+    height: 200px;
+    -webkit-transform: translate(-55px, 130px) rotate(90deg);
+    transform: translate(-55px, 130px) rotate(90deg);
+}
+
+#masterMixLabel {
+    width: 196px;
+    -webkit-transform: translate(0px, -173px);
+    transform: translate(0px, -173px);
+}
+
+#mixLabelTR {
+    position: absolute;
+    -webkit-transform: translate(30px, -140px);
+    transform: translate(30px, -140px);
+}
+
+#mixLabelTB {
+    position: absolute;
+    -webkit-transform: translate(80px, -140px);
+    transform: translate(80px, -140px);
+}
+
+#mixLabelMaster {
+    position: absolute;
+    -webkit-transform: translate(120px, -140px);
+    transform: translate(120px, -140px);
+}
+
+#transportView {
+    width: 198px;
+    height: 70px;
+    margin-bottom: 30px;
+    -webkit-transform: translate(-10px, 9px);
+    transform: translate(-10px, 9px);
+}
+
+#masterFxView {
+    width: 198px;
+    height: 255px;
+}
+
+#masterCompView {
+    width: 196px;
+    height: 160px;
+}
+
+#masterCompDialContainer {
+    height: 0px;
+    -webkit-transform: translate(0px, 10px);
+    transform: translate(0px, 10px);
+}
+
+#masterCompReduction {
+    margin-top: 20px;
+}
+
+#masterCompAttack {
+    margin-top: 20px;
+}
+
+#masterCompRelease {
+    margin-top: 20px;
+}
+
+#masterDistView {
+    width: 196px;
+    height: 100px;
+}
+
+#masterDistDialContainer {
+    height: 0px;
+    -webkit-transform: translate(20px, 10px);
+    transform: translate(20px, 10px);
+}
+
+#transportStopButton {
+    width: 60px;
+    height: 60px;
+    background-color: #219a65;
+    float: left;
+    margin:0px 4px 0px 39px;
+    border-radius:12px 0px 0px 12px;
+}
+
+#transportPlayButton {
+    width: 60px;
+    height: 60px;
+    background-color: #219a65;
+    float: left;
+    border-radius: 0px 12px 12px 0px;    
+}
+
+div.transportBtn {
+    opacity: 0.6;
+}
+
+div.transportBtnOn {
+    opacity: 1;
+}
+
+#devicesView {
+    width: 824px;
+    height: 768px;
+    float: left;
+}
+
+#trFader {
+    position: absolute;
+    -webkit-transform: translate(0px, 145px) rotate(180deg);
+    transform: translate(0px, 145px) rotate(180deg);
+}
+
+#tbFader {
+    position: absolute;
+    -webkit-transform: translate(0px, 95px) rotate(180deg);
+    transform: translate(0px, 95px) rotate(180deg);
+}
+
+#masterFader {
+    position: absolute;
+    -webkit-transform: translate(0px, 45px) rotate(180deg);
+    transform: translate(0px, 45px) rotate(180deg);
+}
+
+#tbView {
+    width: 824px;
+    height: 384px;
+}
+
+#tbSynthView {
+    width: 616px;
+    height: 88px;
+    float: left;
+}
+
+#tbWaveformView {
+    width: 140px;
+    height: 88px;
+    float: left;
+}
+
+#tbWaveformBtnContainer {
+   -webkit-transform: translate(20px, 10px);
+   transform: translate(20px, 10px);
+}
+
+div.waveformBtn {
+    opacity: 0.4;
+}
+
+div.waveformBtnOn { 
+    opacity: 1;
+}
+
+#tbSawtoothWaveform {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px 0px 0px 12px;
+    background-color: #219a65;
+    float: left;
+}
+
+#tbSquareWaveform {
+    width: 48px;
+    height: 48px;
+    margin-left: 4px;
+    border-radius: 0px 12px 12px 0px;
+    background-color: #219a65;
+    float: left;
+}
+
+#tbFxView {
+    width: 824px;
+    height: 100px;
+    float: left;
+}
+
+#tbCompView {
+    width: 400px;
+    height: 100px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#tbCompDialContainer {
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
+}
+
+#tbDelayView {
+    width: 123px;
+    height: 100px;
+    float: left;
+}
+
+#tbDelayDialContainer {
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
+}
+
+#tbDistView {
+    width: 296px;
+    height: 100px;
+    float: left;
+}
+
+#tbDistDialContainer {
+    -webkit-transform: translate(60px, 10px);
+    transform: translate(60px, 10px);
+}
+
+#tbFilterView {
+    width: 470px;
+    height: 88px;
+    float: left;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+}
+
+#tbFilterDialContainer {
+    -webkit-transform: translate(40px, 5px);
+    transform: translate(40px, 5px);
+}
+
+#bpmView {
+    width: 202px;
+    height: 88px;
+    float: left;
+}
+
+#bpm {
+    width: 50px;
+    height: 50px;
+    margin-top: 8px;
+    margin-left: 5px;
+    float: left;
+    text-align: center;
+    font-size: 24px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #219a65;
+}
+
+#bpmLabel {
+    line-height: .2em;
+}
+
+#bpmUp {
+    width: 50px;
+    height: 50px;
+    background-color: #219a65;
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+    border-radius: 12px 12px 0px 0px;
+}
+
+#bpmDown {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color: #219a65;
+    float: left;
+    border-radius: 0px 0px 12px 12px;
+}
+
+#tbNoteView {
+    top: 190px;
+    height: 192px;
+    width: 616px;
+}
+
+div.whiteNote {
+    width: 70px;
+    height: 180px;
+    background-color: #e9f6f1;
+    border-radius: 0px 0px 16px 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #222325;
+    float: left;
+}
+
+div.blackNote {
+    width: 60px;
+    height: 90px;
+    position: absolute;
+    background-color: #222325;
+    border-radius: 0px 0px 16px 16px;
+   border-style: solid;
+   border-width: 0px 1px 1px 1px;
+   border-color: white;
+}
+
+div.noteOn {
+    background-color: #60e5b2;
+}
+
+#blackNote1 {
+    left: 42px;
+}
+
+#blackNote2 {
+    left: 112px;
+}
+
+#blackNote3 {
+    left: 260px;
+}
+
+#blackNote4 {
+    left: 330px;
+}
+
+#blackNote5 {
+    left: 400px;
+}
+
+#tbStepSequencerView {
+    width: 208px;
+    height: 192px;
+    left: 616px;
+    top: 189px;
+    float: left;
+    border-style: solid;
+    border-width:1px 0px 1px 1px;
+}
+
+#tbStepBtnContainer {
+    -webkit-transform: translate(20px, 12px);
+    transform: translate(20px, 12px);
+}
+
+#tbStepView {
+    width: 50px;
+    height: 50px;
+    background-color: #219a65;
+    float: left;
+}
+
+#tbStepLabel {
+    width: 50px;
+    text-align: center;
+    float: left;
+}
+
+#tbCurrentStepView {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+}
+
+p.tbSeqBtnLbl {
+    line-height: .5em;
+    cursor: hand;
+}
+
+div.tbSeqBtn {
+    opacity: 0.6;
+}
+
+div.tbSeqBtnOn {
+    opacity: 1.0;
+}
+
+#tbNextStep {
+    width: 50px;
+    height: 50px;
+    left: 110px;
+    background-color: #219a65;
+    text-align: center;
+    position: absolute;
+}
+
+#tbPrevStep {
+    width: 50px;
+    height: 50px;
+    left: 55px;
+    text-align: center;
+    background-color: #219a65;
+    position: absolute;
+}
+
+#tbNoteOn {
+    width: 50px;
+    height: 50px;
+    top: 55px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;
+}
+
+#tbNoteOff {
+    width: 50px;
+    height: 50px;
+    top: 55px;
+    left: 55px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;    
+}
+
+#tbNoteAccent {
+    width: 50px;
+    height: 50px;
+    top: 55px;
+    left: 110px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;        
+}
+
+#tbOctaveDown {
+    width: 50px;
+    height: 50px;
+    top: 110px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;    
+}
+
+#tbOctaveUp {
+    width: 50px;
+    height: 50px;
+    top: 110px;
+    left: 55px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;    
+}
+
+#tbNoteSlide {
+    width: 50px;
+    height: 50px;
+    top: 110px;
+    left: 110px;
+    background-color: #219a65;
+    position: absolute;
+    text-align: center;    
+}
+
+#trView {
+   width: 824px;
+   height: 384px;
+   top: 384px;
+}
+
+#trFxView {
+    width: 824px;
+    height: 100px;
+    float: left;
+}
+
+#trCompView {
+    width: 400px;
+    height: 100px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#trCompLabel {
+    
+}
+
+#trCompDialContainer {
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
+}
+
+#trDelayView {
+    width: 123px;
+    height: 100px;
+    float: left;
+}
+
+#trDelayDialContainer {
+    -webkit-transform: translate(20px, 10px);
+    transform: translate(20px, 10px);
+}
+
+
+#trDistView {
+    width: 296px;
+    height: 100px;
+    float: left;
+}
+
+#trDistDialContainer {
+    -webkit-transform: translate(70px, 10px);
+    transform: translate(70px, 10px);
+}
+
+#trMixView {
+    height: 100px;
+    width: 824px;
+    top: 100px;
+}
+
+#bdFader {
+    -webkit-transform: translate(-18px, 40px) rotate(-90deg);
+    transform: translate(-18px, 40px) rotate(-90deg);
+    width: 80px;
+    display: inline-block;
+}
+
+#sdFader {
+    -webkit-transform: translate(-55px, 40px) rotate(-90deg);
+    transform: translate(-18px, 40px) rotate(-90deg);
+    width: 80px;
+    display: inline-block;    
+}
+
+#ltFader {
+    -webkit-transform: translate(-92px, 40px) rotate(-90deg);
+    transform: translate(-92px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#mtFader {
+    -webkit-transform: translate(-130px, 40px) rotate(-90deg);
+    transform: translate(-130px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#htFader {
+    -webkit-transform: translate(-165px, 40px) rotate(-90deg);
+    transform: translate(-165px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#lcFader {
+    -webkit-transform: translate(-205px, 40px) rotate(-90deg);
+    transform: translate(-205px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#mcFader {
+    -webkit-transform: translate(-240px, 40px) rotate(-90deg);
+    transform: translate(-240px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#hcFader {
+    -webkit-transform: translate(-280px, 40px) rotate(-90deg);
+    transform: translate(-280px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#rsFader {
+    -webkit-transform: translate(-318px, 40px) rotate(-90deg);
+    transform: translate(-318px, 40px) rotate(-90deg);
+    width: 80px;
+}
+
+#clFader {
+    -webkit-transform: translate(440px, 18px) rotate(-90deg);
+    transform: translate(440px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#maFader {
+    -webkit-transform: translate(405px, 18px) rotate(-90deg);
+    transform: translate(405px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#cpFader {
+    -webkit-transform: translate(365px, 18px) rotate(-90deg);
+    transform: translate(365px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#cbFader {
+    -webkit-transform: translate(330px, 18px) rotate(-90deg);
+    transform: translate(330px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#cyFader {
+    -webkit-transform: translate(292px, 18px) rotate(-90deg);
+    transform: translate(292px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#ohFader {
+    -webkit-transform: translate(255px, 18px) rotate(-90deg);
+    transform: translate(255px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#chFader {
+    -webkit-transform: translate(216px, 18px) rotate(-90deg);
+    transform: translate(216px, 18px) rotate(-90deg);
+    width: 80px;
+}
+
+#trSoundView {
+    width: 824px;
+    height: 50px;
+    top: 200px;
+}
+
+div.sampleBtn {
+    background-color: #2b473d;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    cursor: hand;
+    vertical-align:middle;
+    line-height: .5em;
+    width: 47px;
+    height: 50px;
+    margin-right: 4px;
+    float: left;
+}
+
+div.sampleBtnOn {
+    background-color: #219a65;
+}
+
+div.trButton {
+    width: 47px;
+    height: 100px;
+    margin-right: 4px;
+    float: left;
+    opacity: .6;
+
+}
+
+p.trButtonLbl {
+    height: 40px;
+    line-height: .5em;
+    margin-left: 4px;
+    text-align: left;
+}
+
+div.trButtonOn {
+    opacity: 1;
+}
+
+div.trButtonGrp1 {
+    background-color: #dc513a;
+
+}
+
+div.trButtonGrp2 {
+    background-color: #69d0d0;
+}
+
+div.trButtonGrp3 {
+    background-color: #36c77b;
+}
+
+div.trButtonGrp4 {
+    background-color: #acb5bd;
+}
+
+#trSequenceView {
+    width: 824px;
+    height: 128px;
+    top: 256px;
+}
