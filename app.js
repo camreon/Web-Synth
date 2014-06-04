@@ -33,15 +33,19 @@ var context,
     type = 2,                        // type of waveform for oscillator, defaults to 2
     startTime,                       // start time of loop
     endTime,                         // end time of loop
-    tune = 0,
+
     filter,
+    tune = 0,						 // synth filter controls
     accGainValue = 0,
     decayValue = 0,
     resValue = 0,
     cutoff = 0,
     envValue = 0,
 
-    trGain, tbGain, maGain;          // top level gain nodes
+    trGain, tbGain, maGain,          // top level gain nodes
+
+    trWaveShaper, trCompressor,
+    tbWaveShaper, tbCompressor;
 
 
 function setupAudioGraph() {
@@ -49,14 +53,14 @@ function setupAudioGraph() {
     try {
 		    window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		    context = new AudioContext();
-        // start the animation timer
-        window.webkitRequestAnimationFrame(timer);
+	        // start the animation timer
+	        window.webkitRequestAnimationFrame(timer);
 
-        // setup drum sequencer
-        for (var i = 0; i < LENGTH; i++) {
-            var sample = new sound(SRC + DRUMNAMES[i] + ".wav", context.createGain());
-            sample.load();
-            drumSamples[DRUMNAMES[i]] = sample;
+	        // setup drum sequencer
+	        for (var i = 0; i < LENGTH; i++) {
+	            var sample = new sound(SRC + DRUMNAMES[i] + ".wav", context.createGain());
+	            sample.load();
+	            drumSamples[DRUMNAMES[i]] = sample;
         }
 
         // setup gain nodes
@@ -66,6 +70,12 @@ function setupAudioGraph() {
         tbGain.gain.value = .5;
         maGain = context.createGain();
         maGain.gain.value = .5;
+
+        // distortion and compressor nodes
+        trWaveShaper = context.createWaveShaper();
+    	trCompressor = context.createDynamicsCompressor();
+    	tbWaveShaper = context.createWaveShaper();
+    	tbCompressor = context.createDynamicsCompressor();
 
     } catch(e) {
         alert(e);
@@ -127,7 +137,7 @@ function playSound(note, time, modifier, i) {
             // set next note to current note
             if (modifier == "slide")
                 window.noteSequencer.sequence.notes[i + 1] = note;
-            // accent means turning volume controls on?
+            // accent means turning volume up
             if (modifier == "accent") {
                 gainNode.gain.value = accGainValue;
             }
@@ -141,14 +151,19 @@ function playSound(note, time, modifier, i) {
             filter.gain.setTargetAtTime(0, time + decayValue, 1);
         if (envValue)
             filter.frequency.setTargetAtTime(0, time + envValue, 1);
+        // TODO: filter mutes osc
+        // TODO: something increases volume every loop (overlapping oscillators?)
 
         // connect nodes
         osc.connect(filter);
-        filter.connect(gainNode);
+        filter.connect(tbCompressor);
+        tbCompressor.connect(tbWaveShaper);
+        tbWaveShaper.connect(gainNode);
         gainNode.connect(tbGain);
         tbGain.connect(maGain);
         maGain.connect(context.destination);
 
+        console.log(time);
         osc.start(time);
         osc.stop(time + sixteenthNoteTime);
     }
@@ -177,9 +192,69 @@ function onFaderChangeEvent(faderEvent) {
 }
 
 function onFxParamChangeEvent(fxEvent) {
-    console.log(fxEvent.fxParamName);
-    console.log(fxEvent.fxParamValue);
+    // console.log(fxEvent.fxParamName);
+    // console.log(fxEvent.fxParamValue);
+    var prefix = fxEvent.fxParamName.substring(0,2);
+    var firstName = fxEvent.fxParamName.substring(2,6);
+    var lastName = fxEvent.fxParamName.substring(6);
+
+    if (prefix == "tr") {
+    	if (firstName == "Dist")
+	    	changeDist(trWaveShaper, lastName, fxEvent.fxParamValue);
+	    else
+	    	changeComp(trCompressor, lastName, fxEvent.fxParamValue);
+	} else {
+		if (firstName == "Dist")
+	    	changeDist(tbWaveShaper, lastName, fxEvent.fxParamValue);
+	    else
+	    	changeComp(tbCompressor, lastName, fxEvent.fxParamValue);
+	}
+	// TODO: is there a way to improve this?
 }
+
+function changeDist(waveShaper, lastName, value) {
+	if (lastName == "Type") {
+		if (value < 30)
+			waveShaper.oversample = "none";
+		else if (value > 70)
+			waveShaper.oversample = "4x";
+		else
+			waveShaper.oversample = "2x";
+	}
+	else { // Amount
+		waveShaper.curve = makeDistortionCurve(value);
+    }
+}
+
+function changeComp(compressor, lastName, value) {
+	if (lastName == "Threshold") compressor.threshold.value = value - 100; 	  	  	// -100 to 0
+	else if (lastName == "Knee") compressor.knee.value = (value/100) * 40; 	  	  	// 0 to 40
+	else if (lastName == "Ratio") compressor.ratio.value = ((value/100) * 19) + 1;  // 1 to 20
+	else if (lastName == "Reduction") compressor.reduction.value = (value-100) / 5; // -20 to 0
+	else if (lastName == "Attack") compressor.attack.value = value / 100; 	  	  	// 0 to 1
+	else compressor.release.value = value / 100; 								  	// 0 to 1
+
+    // else { // Dela y
+
+    // }
+
+    // set default values instead of 0?
+}
+
+// http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
+function makeDistortionCurve(amount) {
+  var k = typeof amount === 'number' ? amount : 50,
+    n_samples = 44100,
+    curve = new Float32Array(n_samples),
+    deg = Math.PI / 180,
+    i = 0,
+    x;
+  for ( ; i < n_samples; ++i ) {
+    x = i * 2 / n_samples - 1;
+    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+  }
+  return curve;
+};
 
 function onFxDeviceEvent(fxEvent) {
     console.log(fxEvent.fxDeviceName);

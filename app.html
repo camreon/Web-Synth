@@ -6,14 +6,14 @@
         <script src="lib/sequencer.js"></script>
         <script src="app.js" onload="setupAudioGraph()"></script>
     </head>
-    
+
     <body>
     <div id="container">
         <div id="appView" class="bordered noselect">
             <div id="devicesView" class="rightBorder">
                 <div id="tbView" class="absolutePositioned">
                     <div id="tbFxView" class="bottomBorder">
-                        
+
                         <div id="tbCompView" class="rightBorder">
                             <div class="fxLabel">
                                 <div id="tbComp" class="fxToggle"></div>
@@ -22,42 +22,42 @@
                             <div id="tbCompDialContainer">
                                 <div id="tbCompThreshold" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">THRESHOLD</div>
                                 </div>
-                                
+
                                 <div id="tbCompKnee" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">KNEE</div>
                                 </div>
-                                
+
                                 <div id="tbCompRatio" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">RATIO</div>
                                 </div>
-                                
+
                                 <div id="tbCompReduction" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">REDUCTION</div>
                                 </div>
 
                                 <div id="tbCompAttack" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">ATTACK</div>
                                 </div>
 
                                 <div id="tbCompRelease" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">RELEASE</div>
                                 </div>
@@ -73,20 +73,20 @@
                                 <div id="tbDistDialContainer">
                                     <div id="tbDistAmount" class="dialControl">
                                         <div class="dialTipContainer">
-                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                         </div>
                                         <div class="dialLabel">AMOUNT</div>
                                     </div>
-                                    
+
                                     <div id="tbDistType" class="dialControl">
                                         <div class="dialTipContainer">
-                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                         </div>
                                         <div class="dialLabel">TYPE</div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                         </div>
-                        
+
                         <div id="tbDelayView">
                             <div class="fxLabel">
                                 <div id="tbDelay" class="fxToggle"></div>
@@ -95,7 +95,7 @@
                             <div id="tbDelayDialContainer">
                                 <div id="tbDelayTime" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">TIME</div>
                                 </div>
@@ -119,44 +119,44 @@
                             <div id="tbFilterDialContainer">
                                 <div id="tbTune" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">TUNE</div>
                                 </div>
-                            
+
                                 <div id="tbCutoff" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">CUTOFF</div>
                                 </div>
-                                
+
                                 <div id="tbResonance" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">RESONANCE</div>
                                 </div>
-                                
+
                                 <div id="tbEnv" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">ENV</div>
                                 </div>
-                                
+
                                 <div id="tbDecay" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">DECAY</div>
                                 </div>
-                            
+
                                 <div id="tbAccent" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
-                                    <div class="dialLabel">ACCENT</div>                                
+                                    <div class="dialLabel">ACCENT</div>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                         <div id="whiteNote1" class="whiteNote noteOn" onclick="lib.noteClickHandler(this);"></div>
                         <div id="blackNote1" class="blackNote" onclick="lib.noteClickHandler(this);"></div>
                         <div id="whiteNote2" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
-                        <div id="blackNote2" class="blackNote" onclick="lib.noteClickHandler(this)"></div>                        
+                        <div id="blackNote2" class="blackNote" onclick="lib.noteClickHandler(this)"></div>
                         <div id="whiteNote3" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
                         <div id="whiteNote4" class="whiteNote" onclick="lib.noteClickHandler(this)"></div>
                         <div id="blackNote3" class="blackNote" onclick="lib.noteClickHandler(this)"></div>
@@ -192,18 +192,18 @@
                             </div>
                             <div id="tbPrevStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">PREV</p></div>
                             <div id="tbNextStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">NEXT</p></div>
-                            
+
                             <div id="tbNoteOn" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ON</p></div>
                             <div id="tbNoteOff" class="tbSeqBtn tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">OFF</p></div>
                             <div id="tbNoteAccent" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ACC</p></div>
-                            
+
                             <div id="tbOctaveDown" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">DOWN</p></div>
                             <div id="tbOctaveUp" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">UP</p></div>
                             <div id="tbNoteSlide" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">SLIDE</p></div>
                         </div>
                     </div>
                 </div>
-               
+
                 <div id="trView" class="absolutePositioned">
                     <div id="trFxView" class="absolutePositioned bottomBorder">
                         <div id="trCompView" class="rightBorder">
@@ -214,42 +214,42 @@
                             <div id="trCompDialContainer">
                                 <div id="trCompThreshold" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">THRESHOLD</div>
                                 </div>
-                                
+
                                 <div id="trCompKnee" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">KNEE</div>
                                 </div>
-                                
+
                                 <div id="trCompRatio" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">RATIO</div>
                                 </div>
-                                
+
                                 <div id="trCompReduction" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">REDUCTION</div>
                                 </div>
 
                                 <div id="trCompAttack" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">ATTACK</div>
                                 </div>
 
                                 <div id="trCompRelease" class="dialControl">
                                     <div class="dialTipContainer">
-                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                        <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                     </div>
                                     <div class="dialLabel">RELEASE</div>
                                 </div>
@@ -265,20 +265,20 @@
                                 <div id="trDistDialContainer">
                                     <div id="trDistAmount" class="dialControl">
                                         <div class="dialTipContainer">
-                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                         </div>
                                         <div class="dialLabel">AMOUNT</div>
                                     </div>
-                                    
+
                                     <div id="trDistType" class="dialControl">
                                         <div class="dialTipContainer">
-                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                         </div>
                                         <div class="dialLabel">TYPE</div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                         </div>
-                        
+
                         <div id="trDelayView">
                             <div class="fxLabel">
                                 <div id="trDelay" class="fxToggle"></div>
@@ -287,15 +287,15 @@
                                 <div id="trDelayDialContainer">
                                     <div id="trDelayTime" class="dialControl">
                                         <div class="dialTipContainer">
-                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                            <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                         </div>
                                     <div class="dialLabel">TIME</div>
                                     </div>
                                 </div>
                         </div>
-                        
+
                     </div>
-                
+
                     <div id="trMixView" class="absolutePositioned">
                         <input id="bdFader" type="range" class="absolutePositioned" />
                         <input id="sdFader" type="range" class="absolutePositioned"  />
@@ -314,7 +314,7 @@
                         <input id="ohFader" type="range" />
                         <input id="chFader" type="range" />
                     </div>
-                    
+
                     <div id="trSoundView" class="absolutePositioned">
                         <div id="bdSample" class="sampleBtn sampleBtnOn" onclick="lib.drumSoundClickHandler(this)"><p>BD</p></div>
                         <div id="sdSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>SD</p></div>
@@ -333,40 +333,40 @@
                         <div id="ohSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>OH</p></div>
                         <div id="chSample" class="sampleBtn" onclick="lib.drumSoundClickHandler(this)"><p>CH</p></div>
                     </div>
-                    
+
                     <div id="trSequenceView" class="absolutePositioned">
-                    
+
                         <div id="trSqBtn1" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">1</div>
                         <div id="trSqBtn2" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">2</div>
                         <div id="trSqBtn3" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">3</div>
                         <div id="trSqBtn4" class="trButton trButtonGrp1" onclick="lib.drumSequencerClickHandler(event)">4</div>
-                        
+
                         <div id="trSqBtn5" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">5</div>
                         <div id="trSqBtn6" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">6</div>
                         <div id="trSqBtn7" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">7</div>
                         <div id="trSqBtn8" class="trButton trButtonGrp2" onclick="lib.drumSequencerClickHandler(event)">8</div>
-                        
+
                         <div id="trSqBtn9"  class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">9</div>
                         <div id="trSqBtn10" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">10</div>
                         <div id="trSqBtn11" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">11</div>
                         <div id="trSqBtn12" class="trButton trButtonGrp3" onclick="lib.drumSequencerClickHandler(event)">12</div>
-                        
+
                         <div id="trSqBtn13" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">13</div>
                         <div id="trSqBtn14" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">14</div>
                         <div id="trSqBtn15" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">15</div>
                         <div id="trSqBtn16" class="trButton trButtonGrp4" onclick="lib.drumSequencerClickHandler(event)">16</div>
-                        
+
                     </div>
-                </div>                
+                </div>
             </div>
-            
+
             <div id="mainMixerView" class="bottomBorder">
                 <div class="fxLabel">TRANSPORT</div>
                 <div id="transportView">
                     <div id="transportStopButton" class="transportBtn transportBtnOn" onclick="lib.transportClickHandler(this);"><img src="assets/stop.png"></div>
                     <div id="transportPlayButton" class="transportBtn" onclick="lib.transportClickHandler(this);"><img src="assets/play.png"></div>
                 </div>
-                
+
                 <div id="masterFxView">
                     <div id="masterDistView">
                         <div class="fxLabel">
@@ -376,17 +376,17 @@
                         <div id="masterDistDialContainer">
                             <div id="masterDistAmount" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">AMOUNT</div>
                             </div>
-                            
+
                             <div id="masterDistType" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">TYPE</div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div id="masterCompView">
@@ -397,50 +397,50 @@
                         <div id="masterCompDialContainer">
                             <div id="masterCompThreshold" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">THRESH</div>
                             </div>
-                            
+
                             <div id="masterCompKnee" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">KNEE</div>
                             </div>
-                            
+
                             <div id="masterCompRatio" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">RATIO</div>
                             </div>
-                            
+
                             <div id="masterCompReduction" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">REDUCTION</div>
                             </div>
 
                             <div id="masterCompAttack" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">ATTACK</div>
                             </div>
 
                             <div id="masterCompRelease" class="dialControl">
                                 <div class="dialTipContainer">
-                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div> 
+                                    <div class="dialTip" style="-webkit-transform:rotate(0deg); transform:rotate(0deg);"></div>
                                 </div>
                                 <div class="dialLabel">RELEASE</div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
                 </div>
-                
+
                 <div id="mixView" class="rotated" />
                     <input id="trFader" type="range" />
                     <input id="tbFader" type="range" />
@@ -450,13 +450,13 @@
                 <div id="masterMixLabel" class="fxLabel topBorder">MASTER MIX</div>
                 <div id="mixLabelTB">303</div>
                 <div id="mixLabelTR">808</div>
-                <div id="mixLabelMaster">Master</div>                
-                
+                <div id="mixLabelMaster">Master</div>
 
-            </div>            
-            
+
+            </div>
+
         </div>
     </div>
     </body>
-    
+
 </html>
