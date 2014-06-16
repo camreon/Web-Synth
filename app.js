@@ -39,13 +39,17 @@ var context,
     accGainValue = 0,
     decayValue = 0,
     resValue = 0,
-    cutoff = 0,
+    cutoff = 50,
     envValue = 0,
 
     trGain, tbGain, maGain,          // top level gain nodes
 
-    trWaveShaper, trCompressor,
-    tbWaveShaper, tbCompressor;
+    trWaveShaper, trCompressor,		 // effect nodes
+    tbWaveShaper, tbCompressor,
+    maWaveShaper, maCompressor,
+    trDelay, tbDelay; // TODO: route original and delay thru gain,
+    				  //       make feedback loop sending delayed signal back thru delay node
+    				  //       reducing the gain by a constant amount each time
 
 
 function setupAudioGraph() {
@@ -71,25 +75,32 @@ function setupAudioGraph() {
         maGain = context.createGain();
         maGain.gain.value = .5;
 
-        // distortion and compressor nodes
+        // distortion, compressor, and delay nodes
         trWaveShaper = context.createWaveShaper();
+        tbWaveShaper = context.createWaveShaper();
+        maWaveShaper = context.createWaveShaper();
     	trCompressor = context.createDynamicsCompressor();
-    	tbWaveShaper = context.createWaveShaper();
     	tbCompressor = context.createDynamicsCompressor();
+    	maCompressor = context.createDynamicsCompressor();
+
+    	trDelay = context.createDelay();
+    	tbDelay = context.createDelay();
 
     } catch(e) {
         alert(e);
     }
+
+    // Times loop start time for continuous playback
+    function timer() {
+	    if (isPlaying && context.currentTime >= endTime)
+	        playSequencers();
+
+	    // always schedule the next animation frame at the end of your callback
+	    window.webkitRequestAnimationFrame(timer);
+	}
 }
 
-function timer() {
-    if (isPlaying && context.currentTime >= endTime)
-        playSequencers();
-
-    // always schedule the next animation frame at the end of your callback
-    window.webkitRequestAnimationFrame(timer);
-}
-
+// Loops through the drum and synth sequencers and schedules sounds based on user input
 function playSequencers() {
     startTime = context.currentTime;
     endTime = startTime + 16 * sixteenthNoteTime; //end time of a single loop
@@ -110,6 +121,10 @@ function playSequencers() {
                 drumSamples[property].play(startTime + i * sixteenthNoteTime);
         }
     }
+
+    // finish mixer audio graph connections
+    connectNodes(tbGain, maGain, maCompressor, maWaveShaper, context.destination);
+    connectNodes(trGain, maGain, maCompressor, maWaveShaper, context.destination);
 }
 
 // Plays sounds from a new oscillator based on the note parameter converted
@@ -146,27 +161,26 @@ function playSound(note, time, modifier, i) {
         // filter settings
         filter = context.createBiquadFilter();
         filter.Q.value = resValue;
-        filter.frequency.value = cutoff; // TODO: test this
+
+		filter.frequency.value = cutoff;
+		console.log(filter.frequency.value);
         if (decayValue)
             filter.gain.setTargetAtTime(0, time + decayValue, 1);
         if (envValue)
             filter.frequency.setTargetAtTime(0, time + envValue, 1);
-        // TODO: filter mutes osc
-        // TODO: something increases volume every loop (overlapping oscillators?)
 
-        // connect nodes
-        osc.connect(filter);
-        filter.connect(tbCompressor);
-        tbCompressor.connect(tbWaveShaper);
-        tbWaveShaper.connect(gainNode);
-        gainNode.connect(tbGain);
-        tbGain.connect(maGain);
-        maGain.connect(context.destination);
+        connectNodes(osc, filter, tbCompressor, tbWaveShaper, tbDelay, gainNode, tbGain);
 
-        console.log(time);
         osc.start(time);
         osc.stop(time + sixteenthNoteTime);
     }
+}
+
+// Calls the connect function in order between each node passed in as a param
+function connectNodes() {
+	for (var i = 0; i < arguments.length - 1; i++) {
+		arguments[i].connect(arguments[i + 1]);
+	}
 }
 
 function onTempoChangeEvent(tempoEvent){
@@ -201,64 +215,76 @@ function onFxParamChangeEvent(fxEvent) {
     if (prefix == "tr") {
     	if (firstName == "Dist")
 	    	changeDist(trWaveShaper, lastName, fxEvent.fxParamValue);
-	    else
+	    else if (firstName == "Comp")
 	    	changeComp(trCompressor, lastName, fxEvent.fxParamValue);
-	} else {
+	    else
+	    	trDelay.delayTime.value = fxEvent.fxParamValue / 10; // [0, 10]
+	} else if (prefix == "tb") {
 		if (firstName == "Dist")
 	    	changeDist(tbWaveShaper, lastName, fxEvent.fxParamValue);
-	    else
+	    else if (firstName == "Comp")
 	    	changeComp(tbCompressor, lastName, fxEvent.fxParamValue);
+	    else
+	    	tbDelay.delayTime.value = fxEvent.fxParamValue / 10;
+	} else { // master
+		// temp hack since the prefix is longer for master nodes
+		firstName = lastName.substring(0,4);
+		lastName = lastName.substring(4);
+
+		if (firstName == "Dist") {
+	    	changeDist(maWaveShaper, lastName, fxEvent.fxParamValue);
+		}
+	    else if (firstName == "Comp")
+	    	changeComp(maCompressor, lastName, fxEvent.fxParamValue);
 	}
-	// TODO: is there a way to improve this?
-}
+	// TODO: remove duplicate code. choose which node to change by building a string of the var name?
+	// http://stackoverflow.com/questions/5613834/convert-string-to-variable-name-in-javascript
 
-function changeDist(waveShaper, lastName, value) {
-	if (lastName == "Type") {
-		if (value < 30)
-			waveShaper.oversample = "none";
-		else if (value > 70)
-			waveShaper.oversample = "4x";
-		else
-			waveShaper.oversample = "2x";
+	// Helper function that updates the lastName attribute of the compressor node parameter
+	// with the properly scaled value.
+	function changeComp(compressor, lastName, value) {
+		if (lastName == "Threshold") compressor.threshold.value = value - 100; 	  	  	// [-100, 0]
+		else if (lastName == "Knee") compressor.knee.value = (value/100) * 40; 	  	  	// [0, 40]
+		else if (lastName == "Ratio") compressor.ratio.value = ((value/100) * 19) + 1;  // [1, 20]
+		else if (lastName == "Reduction") compressor.reduction.value = (value-100) / 5; // [-20, 0]
+		else if (lastName == "Attack") compressor.attack.value = value / 100; 	  	  	// [0, 1]
+		else compressor.release.value = value / 100; 								  	// [0, 1]
+		// set default values instead of 0?
 	}
-	else { // Amount
-		waveShaper.curve = makeDistortionCurve(value);
-    }
+
+	// Updates the lastName attribute of the waveShaper node parameter with the properly scaled value.
+	function changeDist(waveShaper, lastName, value) {
+		if (lastName == "Type") {
+			if (value < 30)
+				waveShaper.oversample = "none";
+			else if (value > 70)
+				waveShaper.oversample = "4x";
+			else
+				waveShaper.oversample = "2x";
+		} else { // Amount
+			waveShaper.curve = makeDistortionCurve(value);
+	    }
+
+	    // http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
+		function makeDistortionCurve(amount) {
+		  var k = typeof amount === 'number' ? amount : 50,
+		    n_samples = 44100,
+		    curve = new Float32Array(n_samples),
+		    deg = Math.PI / 180,
+		    i = 0,
+		    x;
+		  for ( ; i < n_samples; ++i ) {
+		    x = i * 2 / n_samples - 1;
+		    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+		  }
+		  return curve;
+		};
+	}
 }
-
-function changeComp(compressor, lastName, value) {
-	if (lastName == "Threshold") compressor.threshold.value = value - 100; 	  	  	// -100 to 0
-	else if (lastName == "Knee") compressor.knee.value = (value/100) * 40; 	  	  	// 0 to 40
-	else if (lastName == "Ratio") compressor.ratio.value = ((value/100) * 19) + 1;  // 1 to 20
-	else if (lastName == "Reduction") compressor.reduction.value = (value-100) / 5; // -20 to 0
-	else if (lastName == "Attack") compressor.attack.value = value / 100; 	  	  	// 0 to 1
-	else compressor.release.value = value / 100; 								  	// 0 to 1
-
-    // else { // Dela y
-
-    // }
-
-    // set default values instead of 0?
-}
-
-// http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
-function makeDistortionCurve(amount) {
-  var k = typeof amount === 'number' ? amount : 50,
-    n_samples = 44100,
-    curve = new Float32Array(n_samples),
-    deg = Math.PI / 180,
-    i = 0,
-    x;
-  for ( ; i < n_samples; ++i ) {
-    x = i * 2 / n_samples - 1;
-    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
-  }
-  return curve;
-};
 
 function onFxDeviceEvent(fxEvent) {
-    console.log(fxEvent.fxDeviceName);
-    console.log(fxEvent.fxDeviceValue);
+    // console.log(fxEvent.fxDeviceName);
+    // console.log(fxEvent.fxDeviceValue);
 }
 
 function onDrumSoundChangeEvent(drumSoundEvent) {
@@ -293,11 +319,10 @@ function onTuneChangeEvent(tuneEvent) {
 function onFilterChangeEvent(filterEvent) {
     var prefix = filterEvent.filterParamName.substring(0,2);
     var name = filterEvent.filterParamName.substring(2);
-    // console.log(name);
 
     if (prefix == "tb") {
         if (name == "Cutoff")
-            cutoff = filterEvent.filterParamValue * 10.0;
+            cutoff = filterEvent.filterParamValue + 50.0;
         else if (name == "Resonance")
             resValue = filterEvent.filterParamValue * 10.0;
         else if (name == "Env")
