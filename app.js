@@ -36,7 +36,7 @@ var context,
 
     filter,
     tune = 0,						 // synth filter controls
-    accGainValue = 0,
+    accGainValue = 0.9,
     decayValue = 0,
     resValue = 0,
     cutoff = 50,
@@ -69,11 +69,11 @@ function setupAudioGraph() {
 
         // setup gain nodes
         trGain = context.createGain();
-        trGain.gain.value = .5;
+        trGain.gain.value = .9;
         tbGain = context.createGain();
-        tbGain.gain.value = .5;
+        tbGain.gain.value = .9;
         maGain = context.createGain();
-        maGain.gain.value = .5;
+        maGain.gain.value = .9;
 
         // distortion, compressor, and delay nodes
         trWaveShaper = context.createWaveShaper();
@@ -137,7 +137,7 @@ function playSound(note, time, modifier, i) {
         osc.type = type;
 
         var gainNode = context.createGain();
-        gainNode.gain.value = .5; // default value
+        gainNode.gain.value = .9; // default value
 
         // adjust tune
         if (tune)

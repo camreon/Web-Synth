@@ -190,8 +190,8 @@
                             <div id="tbPrevStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">PREV</p></div>
                             <div id="tbNextStep" class="tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">NEXT</p></div>
 
-                            <div id="tbNoteOn" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ON</p></div>
-                            <div id="tbNoteOff" class="tbSeqBtn tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">OFF</p></div>
+                            <div id="tbNoteOn" class="tbSeqBtn tbSeqBtnOn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ON</p></div>
+                            <div id="tbNoteOff" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">OFF</p></div>
                             <div id="tbNoteAccent" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">ACC</p></div>
 
                             <div id="tbOctaveDown" class="tbSeqBtn" onclick="lib.sequencerButtonHandler(this)"><p class="tbSeqBtnLbl">DOWN</p></div>
@@ -294,22 +294,22 @@
                     </div>
 
                     <div id="trMixView" class="absolutePositioned">
-                        <input id="bdFader" type="range" class="absolutePositioned" />
-                        <input id="sdFader" type="range" class="absolutePositioned"  />
-                        <input id="ltFader" type="range"  class="absolutePositioned" />
-                        <input id="mtFader" type="range" />
-                        <input id="htFader" type="range" />
-                        <input id="lcFader" type="range" />
-                        <input id="mcFader" type="range" />
-                        <input id="hcFader" type="range" />
-                        <input id="rsFader" type="range" />
-                        <input id="clFader" type="range" />
-                        <input id="maFader" type="range" />
-                        <input id="cpFader" type="range" />
-                        <input id="cbFader" type="range" />
-                        <input id="cyFader" type="range" />
-                        <input id="ohFader" type="range" />
-                        <input id="chFader" type="range" />
+                        <input id="bdFader" type="range" value="90" class="absolutePositioned" />
+                        <input id="sdFader" type="range" value="90" class="absolutePositioned" />
+                        <input id="ltFader" type="range" value="90" class="absolutePositioned" />
+                        <input id="mtFader" type="range" value="90" />
+                        <input id="htFader" type="range" value="90" />
+                        <input id="lcFader" type="range" value="90" />
+                        <input id="mcFader" type="range" value="90" />
+                        <input id="hcFader" type="range" value="90" />
+                        <input id="rsFader" type="range" value="90" />
+                        <input id="clFader" type="range" value="90" />
+                        <input id="maFader" type="range" value="90" />
+                        <input id="cpFader" type="range" value="90" />
+                        <input id="cbFader" type="range" value="90" />
+                        <input id="cyFader" type="range" value="90" />
+                        <input id="ohFader" type="range" value="90" />
+                        <input id="chFader" type="range" value="90" />
                     </div>
 
                     <div id="trSoundView" class="absolutePositioned">
@@ -439,9 +439,9 @@
                 </div>
 
                 <div id="mixView" class="rotated" />
-                    <input id="trFader" type="range" />
-                    <input id="tbFader" type="range" />
-                    <input id="masterFader" type="range" />
+                    <input id="trFader" type="range" value="90" />
+                    <input id="tbFader" type="range" value="90" />
+                    <input id="masterFader" type="range" value="90" />
                 </div>
 
                 <div id="masterMixLabel" class="fxLabel topBorder">MASTER MIX</div>
